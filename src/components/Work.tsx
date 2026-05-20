@@ -1,7 +1,9 @@
+import { useEffect, useRef } from "react";
 import "./styles/Work.css";
 import { MdArrowOutward } from "react-icons/md";
 import { VscExtensions } from "react-icons/vsc";
 import { FaGithub } from "react-icons/fa6";
+import gsap from "gsap";
 
 const extension = {
   name: "GitFlipper",
@@ -75,51 +77,129 @@ const papers = [
 ];
 
 const Work = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroInnerRef = useRef<HTMLDivElement>(null);
+
+  // Hero tilt + glow effect
+  useEffect(() => {
+    const hero = heroRef.current;
+    const inner = heroInnerRef.current;
+    if (!hero || !inner) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      gsap.to(inner, {
+        rotateY: x * 8,
+        rotateX: -y * 6,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      hero.style.setProperty("--glow-x", `${e.clientX - rect.left}px`);
+      hero.style.setProperty("--glow-y", `${e.clientY - rect.top}px`);
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(inner, {
+        rotateY: 0,
+        rotateX: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    };
+
+    hero.addEventListener("mousemove", handleMouseMove);
+    hero.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      hero.removeEventListener("mousemove", handleMouseMove);
+      hero.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  // Paper card hover glow tracking
+  useEffect(() => {
+    const cards = document.querySelectorAll(".work-paper-card");
+    const handlers = new Map<Element, (e: MouseEvent) => void>();
+
+    cards.forEach((card) => {
+      const handler = (e: MouseEvent) => {
+        const rect = (card as HTMLElement).getBoundingClientRect();
+        (card as HTMLElement).style.setProperty(
+          "--mouse-x",
+          `${e.clientX - rect.left}px`
+        );
+        (card as HTMLElement).style.setProperty(
+          "--mouse-y",
+          `${e.clientY - rect.top}px`
+        );
+      };
+      handlers.set(card, handler);
+      card.addEventListener("mousemove", handler as EventListener);
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        const handler = handlers.get(card);
+        if (handler)
+          card.removeEventListener("mousemove", handler as EventListener);
+      });
+    };
+  }, []);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
-        <h2>
+        <h2 className="work-heading">
           My <span>Work</span>
         </h2>
 
-        <div className="work-hero" data-cursor="disable">
-          <div className="work-hero-label">Featured Project</div>
-          <div className="work-hero-content">
-            <div className="work-hero-info">
-              <h3>{extension.name}</h3>
-              <p className="work-hero-tagline">{extension.tagline}</p>
-              <ul className="work-hero-features">
-                {extension.features.map((f, i) => (
-                  <li key={i}>{f}</li>
-                ))}
-              </ul>
-              <div className="work-hero-actions">
-                <a
-                  href={extension.marketplace}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="work-hero-btn work-hero-btn-primary"
-                >
-                  <VscExtensions />
-                  Install Extension
-                </a>
-                <a
-                  href={extension.source}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="work-hero-btn work-hero-btn-secondary"
-                >
-                  <FaGithub />
-                  Source Code
-                </a>
+        <div className="work-hero" ref={heroRef} data-cursor="disable">
+          <div className="work-hero-glow"></div>
+          <div className="work-hero-inner" ref={heroInnerRef}>
+            <div className="work-hero-label">Featured Project</div>
+            <div className="work-hero-content">
+              <div className="work-hero-info">
+                <h3>{extension.name}</h3>
+                <p className="work-hero-tagline">{extension.tagline}</p>
+                <ul className="work-hero-features">
+                  {extension.features.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
+                <div className="work-hero-actions">
+                  <a
+                    href={extension.marketplace}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="work-hero-btn work-hero-btn-primary"
+                  >
+                    <VscExtensions />
+                    Install Extension
+                  </a>
+                  <a
+                    href={extension.source}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="work-hero-btn work-hero-btn-secondary"
+                  >
+                    <FaGithub />
+                    Source Code
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="work-hero-visual">
-              <div className="work-hero-icon">
-                <VscExtensions />
+              <div className="work-hero-visual">
+                <div className="work-hero-icon">
+                  <VscExtensions />
+                </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="work-divider">
+          <div className="work-divider-line"></div>
+          <div className="work-divider-dot"></div>
         </div>
 
         <div className="work-papers-header">

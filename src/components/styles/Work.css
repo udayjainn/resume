@@ -6,14 +6,14 @@
   padding: 80px 0;
 }
 
-.work-section h2 {
+.work-heading {
   font-size: 70px;
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 50px;
 }
 
-.work-section h2 > span {
+.work-heading > span {
   color: var(--accentColor);
 }
 
@@ -24,10 +24,35 @@
 /* ── Hero Card (VS Code Extension) ── */
 .work-hero {
   position: relative;
+  border-radius: 16px;
+  margin-bottom: 60px;
+  perspective: 800px;
+}
+
+.work-hero-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    400px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(94, 234, 212, 0.12),
+    transparent 60%
+  );
+  z-index: 1;
+}
+
+.work-hero:hover .work-hero-glow {
+  opacity: 1;
+}
+
+.work-hero-inner {
+  position: relative;
   border: 1px solid rgba(94, 234, 212, 0.15);
   border-radius: 16px;
   padding: 50px;
-  margin-bottom: 60px;
   background: linear-gradient(
     135deg,
     rgba(94, 234, 212, 0.04) 0%,
@@ -35,13 +60,15 @@
   );
   overflow: hidden;
   transition: border-color 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.work-hero:hover {
+.work-hero:hover .work-hero-inner {
   border-color: rgba(94, 234, 212, 0.35);
 }
 
-.work-hero::before {
+.work-hero-inner::before {
   content: "";
   position: absolute;
   top: -150px;
@@ -178,6 +205,53 @@
   color: var(--accentColor);
 }
 
+/* ── Glowing Divider ── */
+.work-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-bottom: 40px;
+}
+
+.work-divider-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(94, 234, 212, 0.4) 30%,
+    var(--accentColor) 50%,
+    rgba(94, 234, 212, 0.4) 70%,
+    transparent 100%
+  );
+  transform-origin: center;
+  transform: scaleX(0);
+}
+
+.work-divider-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accentColor);
+  box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 5px #5eead4,
+    0px 0px 60px 10px rgba(94, 234, 212, 0.3);
+  animation: divider-pulse 1.5s ease-in-out infinite alternate;
+  opacity: 0;
+}
+
+@keyframes divider-pulse {
+  0% {
+    box-shadow: 0px 0px 5px 2px #67e8f9;
+  }
+  100% {
+    box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 5px #5eead4,
+      0px 0px 60px 10px rgba(94, 234, 212, 0.3);
+  }
+}
+
 /* ── Research Papers Header ── */
 .work-papers-header {
   display: flex;
@@ -216,20 +290,42 @@
   background: rgba(255, 255, 255, 0.02);
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  overflow: hidden;
+}
+
+.work-paper-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(94, 234, 212, 0.06),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.work-paper-card:hover::before {
+  opacity: 1;
 }
 
 .work-paper-card:hover {
   border-color: rgba(94, 234, 212, 0.25);
   background: rgba(94, 234, 212, 0.03);
   color: inherit;
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(94, 234, 212, 0.08);
 }
 
 .work-paper-card:hover .work-paper-arrow {
   opacity: 1;
   color: var(--accentColor);
+  transform: translate(2px, -2px);
 }
 
 .work-paper-card:hover .work-paper-number {
@@ -243,8 +339,9 @@
   line-height: 1;
   opacity: 0.15;
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   min-width: 48px;
+  font-variant-numeric: tabular-nums;
 }
 
 .work-paper-body {
@@ -291,11 +388,11 @@
 
 /* ── Responsive ── */
 @media only screen and (max-width: 1400px) {
-  .work-section h2 {
+  .work-heading {
     font-size: 50px;
   }
 
-  .work-hero {
+  .work-hero-inner {
     padding: 40px;
   }
 
@@ -324,14 +421,17 @@
     padding: 50px 0;
   }
 
-  .work-section h2 {
+  .work-heading {
     font-size: 40px;
     margin-bottom: 30px;
   }
 
   .work-hero {
-    padding: 28px;
     margin-bottom: 40px;
+  }
+
+  .work-hero-inner {
+    padding: 28px;
   }
 
   .work-hero-info h3 {

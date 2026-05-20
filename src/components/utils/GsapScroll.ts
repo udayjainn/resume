@@ -188,4 +188,80 @@ export function setAllTimeline() {
       0
     );
   }
+
+  // ── Work Section Animations ──
+  const workTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".work-section",
+      start: "top 60%",
+      end: "40% center",
+      scrub: true,
+      invalidateOnRefresh: true,
+    },
+  });
+
+  workTimeline
+    .fromTo(
+      ".work-heading",
+      { opacity: 0, y: 60, filter: "blur(8px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3 },
+      0
+    )
+    .fromTo(
+      ".work-hero",
+      { opacity: 0, y: 80, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.5 },
+      0.1
+    )
+    .fromTo(
+      ".work-divider-line",
+      { scaleX: 0 },
+      { scaleX: 1, duration: 0.4 },
+      0.3
+    )
+    .fromTo(
+      ".work-divider-dot",
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.2 },
+      0.5
+    )
+    .fromTo(
+      ".work-papers-header",
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.3 },
+      0.4
+    )
+    .fromTo(
+      ".work-paper-card",
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, stagger: 0.06, duration: 0.3 },
+      0.5
+    );
+
+  // Animated counter numbers
+  document.querySelectorAll(".work-paper-number").forEach((el, i) => {
+    const target = i + 1;
+    const obj = { val: 0 };
+    gsap.fromTo(
+      obj,
+      { val: 0 },
+      {
+        val: target,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".work-papers-grid",
+          start: "top 70%",
+          end: "top 40%",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+        onUpdate: () => {
+          (el as HTMLElement).textContent = String(
+            Math.round(obj.val)
+          ).padStart(2, "0");
+        },
+      }
+    );
+  });
 }
