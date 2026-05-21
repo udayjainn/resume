@@ -87,19 +87,19 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>MACHINE LEARNING & AI</h3>
-              <h4>Scalable AI Solutions</h4>
+              <h3>CLOUD &amp; FULL-STACK</h3>
+              <h4>Cloud Infrastructure &amp; Web Apps</h4>
               <p>
-                Expertise in building scalable machine learning systems, deploying LLMs, and applying neural networks for data interpretation and automated dataset generation.
+                Enterprise integration platforms with Java Spring Boot and AWS. React frontends to serverless backends with Lambda, S3, and CloudFormation.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Amazon Bedrock</div>
-                <div className="what-tags">TensorFlow &amp; Keras</div>
-                <div className="what-tags">Neural Networks</div>
-                <div className="what-tags">Scikit-learn</div>
-                <div className="what-tags">NLP</div>
-                <div className="what-tags">Model Deployment</div>
+                <div className="what-tags">AWS (Lambda, S3, EC2)</div>
+                <div className="what-tags">Java &amp; Spring Boot</div>
+                <div className="what-tags">React &amp; TypeScript</div>
+                <div className="what-tags">Python &amp; Node.js</div>
+                <div className="what-tags">Docker &amp; CI/CD</div>
+                <div className="what-tags">MySQL &amp; MongoDB</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -123,19 +123,19 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>CLOUD &amp; WEB DEV</h3>
-              <h4>Cloud Infrastructure &amp; Full-Stack</h4>
+              <h3 className="what-h3-small">MACHINE LEARNING & AI</h3>
+              <h4>Research-Driven AI Solutions</h4>
               <p>
-                Strong experience in deploying robust cloud architectures using AWS, building REST APIs with Spring Boot, and crafting modern interfaces with React.
+                7 published papers in healthcare, computer vision, cybersecurity, and NLP. LLM deployment via Amazon Bedrock and automated dataset pipelines.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">AWS (S3, EC2, CDK)</div>
-                <div className="what-tags">Java (Spring Boot)</div>
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">SQL</div>
-                <div className="what-tags">CI/CD Pipelines</div>
+                <div className="what-tags">Amazon Bedrock</div>
+                <div className="what-tags">TensorFlow &amp; Keras</div>
+                <div className="what-tags">SVM &amp; Ensemble Models</div>
+                <div className="what-tags">Scikit-learn</div>
+                <div className="what-tags">NLP &amp; Deep Learning</div>
+                <div className="what-tags">Computer Vision</div>
               </div>
               <div className="what-arrow"></div>
             </div>

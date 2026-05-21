@@ -6,7 +6,7 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Results-driven Software Developer with a strong computer science background building scalable systems and ML solutions. Excel in deadline-driven environments, rapidly mastering cloud technologies (AWS), and delivering production-ready code. Proven track record in research publications, leadership roles, and cloud certifications, thriving in collaborative and autonomous settings.
+          Results-driven Software Developer and AWS Certified AI Practitioner with a strong computer science background building scalable systems and agentic ML solutions. Proven ability to thrive in ambiguous, fast-moving environments, integrating AI-powered developer tooling and LLM orchestration frameworks into the SDLC. Expert at translating complex research into production-ready code with a track record of high-impact leadership and cloud-native architecture.
         </p>
       </div>
     </div>

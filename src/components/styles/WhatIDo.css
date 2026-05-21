@@ -63,15 +63,19 @@
   padding: 10px 50px;
 }
 .what-content h3 {
-  font-size: 35px;
+  font-size: 28px;
   letter-spacing: 1px;
   margin: 0;
 }
+.what-h3-small {
+  font-size: 24px !important;
+}
 .what-content p {
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 13px;
+  line-height: 17px;
   font-weight: 200;
   letter-spacing: 0.7px;
+  margin: 8px 0;
 }
 .what-content h4 {
   font-weight: 300;
