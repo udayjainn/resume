@@ -112,7 +112,7 @@ const Certifications = () => {
   const allCerts = [...certifications, ...certifications];
 
   return (
-    <div className="cert-section">
+    <div className="cert-section" id="certifications">
       <div className="cert-header section-container">
         <h2 className="cert-heading">
           Certi<span>fications</span>
