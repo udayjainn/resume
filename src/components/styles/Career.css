@@ -216,17 +216,39 @@
 
   .career-section h2 {
     width: 100%;
-    font-size: 45px;
-    line-height: 45px;
+    font-size: 35px;
+    line-height: 38px;
     margin-top: 0px;
+    margin-bottom: 50px;
   }
 
   .career-info-in {
     gap: 0px;
+    flex-direction: column;
   }
 
   .career-info h3 {
-    font-size: 22px;
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .career-info h4 {
+    font-size: 20px;
+    line-height: 22px;
+    width: auto;
+  }
+
+  .career-info h5 {
+    font-size: 15px;
+    margin: 5px 0;
+  }
+
+  .career-info-box p {
+    font-size: 13px;
+  }
+
+  .career-info-box {
+    margin-bottom: 40px;
   }
 
   .career-info-in,
