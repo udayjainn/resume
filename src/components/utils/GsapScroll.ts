@@ -1,5 +1,8 @@
 import * as THREE from "three";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
@@ -189,79 +192,69 @@ export function setAllTimeline() {
     );
   }
 
-  // ── Work Section Animations ──
-  const workTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top 60%",
-      end: "40% center",
-      scrub: true,
-      invalidateOnRefresh: true,
-    },
-  });
+  // ── Work Section ──
+  // Set initial hidden state
+  gsap.set(".work-heading", { opacity: 0, y: 60 });
+  gsap.set(".work-hero-inner", { opacity: 0, y: 80, scale: 0.96 });
+  gsap.set(".work-divider-line", { scaleX: 0 });
+  gsap.set(".work-divider-dot", { scale: 0, opacity: 0 });
+  gsap.set(".work-papers-header", { opacity: 0, y: 30 });
+  gsap.set(".work-paper-card", { opacity: 0, y: 50 });
 
-  workTimeline
-    .fromTo(
-      ".work-heading",
-      { opacity: 0, y: 60, filter: "blur(8px)" },
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3 },
-      0
-    )
-    .fromTo(
-      ".work-hero",
-      { opacity: 0, y: 80, scale: 0.96 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.5 },
-      0.1
-    )
-    .fromTo(
-      ".work-divider-line",
-      { scaleX: 0 },
-      { scaleX: 1, duration: 0.4 },
-      0.3
-    )
-    .fromTo(
-      ".work-divider-dot",
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.2 },
-      0.5
-    )
-    .fromTo(
-      ".work-papers-header",
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.3 },
-      0.4
-    )
-    .fromTo(
-      ".work-paper-card",
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, stagger: 0.06, duration: 0.3 },
-      0.5
-    );
+  // Build timeline but don't play yet
+  const workTl = gsap.timeline({ paused: true });
 
-  // Animated counter numbers
+  workTl
+    .to(".work-heading", {
+      opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+    })
+    .to(".work-hero-inner", {
+      opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out",
+    }, "-=0.4")
+    .to(".work-divider-line", {
+      scaleX: 1, duration: 1.2, ease: "power2.inOut",
+    }, "-=0.4")
+    .to(".work-divider-dot", {
+      scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2)",
+    }, "-=0.6")
+    .to(".work-papers-header", {
+      opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+    }, "-=0.6")
+    .to(".work-paper-card", {
+      opacity: 1, y: 0, stagger: 0.12, duration: 0.7, ease: "power3.out",
+    }, "-=0.3");
+
+  // Counter numbers
   document.querySelectorAll(".work-paper-number").forEach((el, i) => {
     const target = i + 1;
     const obj = { val: 0 };
-    gsap.fromTo(
+    workTl.to(
       obj,
-      { val: 0 },
       {
         val: target,
-        duration: 0.5,
+        duration: 1,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".work-papers-grid",
-          start: "top 70%",
-          end: "top 40%",
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
         onUpdate: () => {
           (el as HTMLElement).textContent = String(
             Math.round(obj.val)
           ).padStart(2, "0");
         },
-      }
+      },
+      "-=1.0"
     );
+  });
+
+  // Trigger: play once when work section enters viewport
+  let workPlayed = false;
+  ScrollTrigger.create({
+    trigger: ".work-section",
+    start: "top center",
+    id: "work",
+    onUpdate: (self) => {
+      if (!workPlayed && self.isActive) {
+        workPlayed = true;
+        workTl.play();
+      }
+    },
   });
 }
