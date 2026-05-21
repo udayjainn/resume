@@ -1,7 +1,16 @@
-import { MdArrowOutward, MdCopyright } from "react-icons/md";
+import { useState } from "react";
+import { MdArrowOutward, MdContentCopy, MdCopyright, MdCheck } from "react-icons/md";
 import "./styles/Contact.css";
 
 const Contact = () => {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText("udayjain00@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
@@ -9,7 +18,7 @@ const Contact = () => {
         <div className="contact-flex">
           <div className="contact-box">
             <h4>Connect</h4>
-            <p>
+            <p className="contact-email-row">
               <a
                 href="mailto:udayjain00@gmail.com"
                 target="_blank"
@@ -18,6 +27,14 @@ const Contact = () => {
               >
                 Email — udayjain00@gmail.com
               </a>
+              <button
+                className="contact-copy-btn"
+                onClick={copyEmail}
+                data-cursor="disable"
+                title="Copy email"
+              >
+                {copied ? <MdCheck /> : <MdContentCopy />}
+              </button>
             </p>
             <h4>Education</h4>
             <p>
