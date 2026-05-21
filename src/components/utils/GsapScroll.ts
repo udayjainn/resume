@@ -257,4 +257,30 @@ export function setAllTimeline() {
       }
     },
   });
+
+  // ── Certifications Section ──
+  gsap.set(".cert-heading", { opacity: 0, y: 60 });
+  gsap.set(".cert-carousel", { opacity: 0, y: 40 });
+
+  const certTl = gsap.timeline({ paused: true });
+  certTl
+    .to(".cert-heading", {
+      opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+    })
+    .to(".cert-carousel", {
+      opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+    }, "-=0.4");
+
+  let certPlayed = false;
+  ScrollTrigger.create({
+    trigger: ".cert-section",
+    start: "top center",
+    id: "cert",
+    onUpdate: (self) => {
+      if (!certPlayed && self.isActive) {
+        certPlayed = true;
+        certTl.play();
+      }
+    },
+  });
 }
