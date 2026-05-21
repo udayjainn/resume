@@ -189,9 +189,11 @@ const Work = () => {
                 </div>
               </div>
               <div className="work-hero-visual">
-                <div className="work-hero-icon">
-                  <VscExtensions />
-                </div>
+                <img
+                  className="work-hero-logo"
+                  src="/images/gitflipper-logo.png"
+                  alt="GitFlipper"
+                />
               </div>
             </div>
           </div>
