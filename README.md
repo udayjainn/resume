@@ -1,8 +1,8 @@
-# 3D Portfolio Website
+# Uday Jain — 3D Portfolio
 
-This repository contains the source code for a personal 3D portfolio built with React, TypeScript, Three.js, React Three Fiber, and GSAP. It includes animated page sections, a character scene, custom cursor interactions, and smooth transitions designed for a modern portfolio experience.
+A personal portfolio website featuring an interactive 3D character, scroll-driven animations, and physics-based tech stack visualizations. Built with React, TypeScript, Three.js, and GSAP.
 
-Live site: [https://udayjain.netlify.app/](https://udayjain.netlify.app/)
+Live site: [https://udayjain.vercel.app/](https://udayjain.vercel.app/)
 
 ![Portfolio Preview](public/images/preview1.png)
 
@@ -14,18 +14,17 @@ Live site: [https://udayjain.netlify.app/](https://udayjain.netlify.app/)
 - [Getting Started](#getting-started)
 - [Available Scripts](#available-scripts)
 - [GSAP License Note](#gsap-license-note)
-- [Customization Guide](#customization-guide)
-- [Troubleshooting](#troubleshooting)
 - [Deployment](#deployment)
 - [License](#license)
 
 ## Features
 
-- Responsive one-page portfolio layout with reusable section components.
-- 3D character scene rendering powered by React Three Fiber and Three.js.
-- GSAP-powered animations and transitions for interactive storytelling.
-- Custom cursor, hover interactions, and scroll-driven visual effects.
-- Organized component architecture with dedicated utilities and style modules.
+- Interactive 3D character with scroll-driven animations and camera transitions.
+- Physics-based tech stack spheres using React Three Fiber and Rapier.
+- Featured project hero card with 3D tilt effect and glow tracking.
+- Research papers grid with hover animations and counter effects.
+- Glowing divider with pulse animation between sections.
+- Custom cursor, smooth scrolling, and responsive design.
 
 ## Tech Stack
 
@@ -90,8 +89,8 @@ Live site: [https://udayjain.netlify.app/](https://udayjain.netlify.app/)
 1. Clone the repository:
 
    ```bash
-   git clone <your-repository-url>
-   cd 3d-portfolio
+   git clone git@github.com:udayjainn/resume.git
+   cd resume
    ```
 
 2. Install dependencies:
@@ -130,30 +129,6 @@ This project uses the standard `gsap` package, including bonus plugins now avail
 - If migrating from older setups, remove `gsap-trial` from your project.
 
 Read official installation guidance here: [GSAP Installation Docs](https://gsap.com/docs/v3/Installation/)
-
-## Customization Guide
-
-You can adapt this portfolio to your own profile by updating the following areas:
-
-- **Content sections**: Edit files in `src/components/` such as `About.tsx`, `Career.tsx`, `WhatIDo.tsx`, and `Work.tsx`.
-- **Data source**: Update static values in files under `src/data/`.
-- **Styling**: Modify component styles in `src/components/styles/` and global styles in `src/index.css` / `src/App.css`.
-- **3D scene behavior**: Adjust scene logic in `src/components/Character/` and related utilities.
-- **Animations**: Tweak GSAP utilities under `src/components/utils/`.
-
-## Troubleshooting
-
-- **Blank screen in development**  
-  Check browser console for module import errors and verify all dependencies are installed.
-
-- **3D performance issues on low-end devices**  
-  Reduce scene complexity and post-processing effects in the character/scene utilities.
-
-- **GSAP plugin errors**  
-  Ensure you have the correct plugin package and license configuration for your target environment.
-
-- **TypeScript build failures**  
-  Run `npm run build` and address reported type errors before deploying.
 
 ## Deployment
 
