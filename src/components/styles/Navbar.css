@@ -65,6 +65,9 @@
   .navbar-connect {
     display: block;
   }
+  .header ul {
+    column-gap: 20px;
+  }
 }
 @media only screen and (min-width: 1200px) {
   .header {
